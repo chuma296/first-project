@@ -1,13 +1,21 @@
 body {
   font-size: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: rgba(212, 29, 212, 0.856);
+  background:rgba(243, 61, 167, 0.925);
 }
 
-/* container */
+button {
+  background: #ffff00d3;
+  border: 0;
+  padding: 10px 20px;
+}
 
-.container {
+img {
+  max-width: 100%;
+}
+
+/* .wrapper */
+
+.all {
   display: grid;
   grid-gap: 20px;
 }
@@ -16,55 +24,53 @@ body {
   display: grid;
   grid-gap: 20px;
   grid-template-areas:
-   "top1 me1"
-   "top1 me2"
+    "hero hero cta1"
+    "hero hero cta2"
 }
 
-.top1 {
-  grid-area: top1;
+.hero {
+  grid-area: hero;
   min-height: 400px;
+  background: white url(abacha-food-848x477.jpg);
   background-size: cover;
-  background-position:bottom right;
+  background-position: bottom right;
   padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
 }
-.top1 {
+
+.hero > * {
+  background:#ffff00d3;
   padding: 5px;
 }
 
-.me {
-  background:#ffff00de;
+.cta {
+  background: #ffff00d3;
   display: grid;
   align-items: center;
   justify-items: center;
   align-content: center;
 }
 
-.me p {
+.cta p {
   margin: 0;
 }
 
-.me1 {
-  grid-area: me1;
-  background:#ffff00de;
+.cta1 {
+  grid-area: cta1;
+  background: yellow;
 }
 
-.me2{
-  grid-area: me2;
-  background:#ffff00de;
+.cta2 {
+  grid-area: cta2;
+  background:yellow;
 }
 
 .price {
   font-size: 60px;
-  font-weight: 100;
-  text-align: center;
-}
-
-.a{
-  text-align: center;
+  font-weight: 300;
 }
 
 /* Navigation */
@@ -78,7 +84,7 @@ body {
 }
 
 .menu a {
-  background:#ffff00de;
+  background: yellow;
   display: block;
   text-decoration: none;
   padding: 10px;
@@ -88,31 +94,35 @@ body {
   font-size: 20px;
 }
 
-[aria-controls="menu-list"] {
+[aria-controls="menu-list"] 
+{
   display: none;
 }
 
-/* middles */
+/* Features! */
 
-.middles {
+.features {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.middle {
+.feature {
   background: white;
   padding: 10px;
   text-align: center;
 }
 
-.middle .icon {
+.feature .icon {
   font-size: 70px;
 }
+.feature p {
+  color: black;
+}
 
-/* last */
+/* About Section */
 
-.last {
+.about {
   background: white;
   padding:50px;
   display: grid;
@@ -120,7 +130,7 @@ body {
   align-items: center;
 }
 
-/* gallery */
+/* Gallery! */
 
 .gallery {
   display: grid;
@@ -128,19 +138,81 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.gallery h2{
+.gallery img {
+  width: 100%;
+}
+
+.gallery h2 {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  grid-gap: 30px;
+  grid-gap: 20px;
   align-items: center;
-  margin-left: 40%;
-  font-style: oblique;
-  font: outline;
-  color: black;
 }
 
-.gallery img {
-  width: 100%;
-  border-radius: 20px;
+.gallery h2:before, .gallery h2:after {
+  display: block;
+  content: '';
+  height: 10px;
+  background: linear-gradient(to var(--direction, left), var(--yellow), transparent);
 }
+
+.gallery h2:after {
+  --direction: right;
+}
+
+@media (max-width: 1000px) {
+  .menu {
+    perspective: 800px;
+  }
+  [aria-controls="menu-list"] {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .menu ul {
+    max-height: 0;
+    overflow: hidden;
+    transform: rotateX(90deg);
+    transition: all 0.5s;
+  }
+
+  [aria-expanded="true"] ~ ul {
+    display: grid;
+    max-height: 500px;
+    transform: rotateX(0);
+  }
+
+  [aria-expanded="false"] .close {
+    display: none;
+  }
+
+  [aria-expanded="true"] .close {
+    display: inline-block;
+  }
+
+  [aria-expanded="true"] .open {
+    display: none;
+  }
+
+}
+
+@media (max-width: 700px) {
+  .top {
+    grid-template-areas:
+      "hero hero"
+      "cta1 cta2"
+  }
+  /* About */
+  .about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .top {
+    grid-template-areas:
+      "hero"
+      "cta1"
+      "cta2"
+  }
